@@ -112,6 +112,9 @@ public class Principal extends ApplicationAdapter {
 			if (posicaoY_inicial_passaro > 0 || toqueTela)
 				posicaoY_inicial_passaro -= gravidade;
 
+			if (posicaoY_inicial_passaro >= altura_disp)
+				posicaoY_inicial_passaro = altura_disp-passaros[0].getHeight();
+
 			gravidade++;
 		} else if (status_jogo == 2) {
 //			if (posicaoY_inicial_passaro > 0 || toqueTela)
@@ -147,12 +150,12 @@ public class Principal extends ApplicationAdapter {
 		batch.draw(cano_baixo, posicaoX_cano, altura_disp/2 - cano_baixo.getHeight() - espaco_entre_canos/2 + posicaoY_cano);
 		batch.draw(cano_cima, posicaoX_cano, altura_disp/2 + espaco_entre_canos/2 + posicaoY_cano);
 
-		textPontuacao.draw(batch, String.valueOf(pontos), largura_disp/2, altura_disp-110);
+		textPontuacao.draw(batch, String.valueOf(pontos), largura_disp/2-50, altura_disp-110);
 
 		if (status_jogo == 2){
 			batch.draw(game_over, largura_disp/2-game_over.getWidth()/2, altura_disp/2);
-			textReiniciar.draw(batch, "Reiniciar", largura_disp/2-140, altura_disp/2-game_over.getHeight()/2);
-			textMelhorPontuacao.draw(batch, "Recorde: " + pontuacao_maxima, largura_disp/2-140, altura_disp/2-game_over.getHeight());
+			textReiniciar.draw(batch, "Toque para reiniciar", largura_disp/2-200, altura_disp/2-game_over.getHeight()/2);
+			textMelhorPontuacao.draw(batch, "Recorde: " + pontuacao_maxima, largura_disp/2-140, altura_disp/2-game_over.getHeight() - 70);
 		}
 
 		batch.end();
@@ -211,11 +214,11 @@ public class Principal extends ApplicationAdapter {
 
 		textReiniciar = new BitmapFont();
 		textReiniciar.setColor(Color.GREEN);
-		textReiniciar.getData().setScale(2);
+		textReiniciar.getData().setScale(3);
 
 		textMelhorPontuacao = new BitmapFont();
 		textMelhorPontuacao.setColor(Color.RED);
-		textMelhorPontuacao.getData().setScale(2);
+		textMelhorPontuacao.getData().setScale(3);
 
 		shape_renderer = new ShapeRenderer();
 		circulo_passaro = new Circle();
